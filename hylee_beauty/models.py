@@ -71,6 +71,8 @@ class Product(models.Model):
     dimension_width The dimension
     weight  The weight
     manufacturer    The manufacturer
+    category    The category
+    enable  Token if this product is sale
     """
 
     product_name = models.CharField(max_length=200)
@@ -90,6 +92,7 @@ class Product(models.Model):
     weight = models.FloatField()
     manufacturer = models.ForeignKey(Manufacturer)
     category = models.ForeignKey(Category)
+    enable = models.BooleanField(default=True)
 
     def __unicode__(self):
         return "[Product]: " + self.product_name

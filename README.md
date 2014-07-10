@@ -14,15 +14,20 @@ Authors:
 Install
 -----------------------
 
-You need python 2.7.5, django 1.6.5, South.
-For installing tipps, please read the doc.
-It's so easy with pip or easy_install to install these tools.
-Like:
-    pip install django
-    pip install south
+    You need python 2.7.5, django 1.6.5, South.
+    For installing tipps, please read the doc.
+    It's so easy with pip or easy_install to install these tools.
+    Like:
+        pip install django
+        pip install south
 
-But under windows, you must install python, that can be done by downloading the python2.7's exe.
-:_)
+    But under windows, you must install python, that can be done by downloading the python2.7's exe.
+    :_)
+
+Manage
+-----------------------
+
+    Everytime change the model, must using python manage.py syncdb to take the effect on db.
 
 Docs to Read
 -----------------------
