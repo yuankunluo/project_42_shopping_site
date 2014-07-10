@@ -59,7 +59,7 @@ class Product(models.Model):
     meta_description   The description that displayed in html meta tag
     meta_description    The keywords that displayed in html meta tag
     description The html description of this product
-    modelnumber   The model of product
+    model   The model of product
     ean European Article Number
     price The price
     quantity The quantity in stock
@@ -77,7 +77,7 @@ class Product(models.Model):
     meta_description = models.TextField(max_length=1000)
     meta_keywords = models.TextField(max_length=1000)
     description = models.TextField(max_length=100000)
-    modelnumber = models.CharField(max_length=200)
+    model = models.CharField(max_length=200)
     ean = models.IntegerField()
     price = models.FloatField()
     quantity = models.IntegerField()
@@ -89,6 +89,7 @@ class Product(models.Model):
     dimension_width = models.FloatField()
     weight = models.FloatField()
     manufacturer = models.ForeignKey(Manufacturer)
+    category = models.ForeignKey(Category)
 
     def __unicode__(self):
         return "[Product]: " + self.product_name

@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south', # using south to maitain the dbs
     'hylee_beauty', # add the hylee beauty app into system
 )
 
