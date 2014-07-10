@@ -29,6 +29,17 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'hylee_beauty', ['Category'])
 
+        # Adding model 'Brand'
+        db.create_table(u'hylee_beauty_brand', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('meta_description', self.gf('django.db.models.fields.TextField')(max_length=500)),
+            ('meta_keywords', self.gf('django.db.models.fields.TextField')(max_length=500)),
+            ('description', self.gf('django.db.models.fields.TextField')(max_length=10000)),
+            ('manufacturer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['hylee_beauty.Manufacturer'])),
+        ))
+        db.send_create_signal(u'hylee_beauty', ['Brand'])
+
         # Adding model 'Image'
         db.create_table(u'hylee_beauty_image', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -44,8 +55,8 @@ class Migration(SchemaMigration):
             ('description', self.gf('django.db.models.fields.TextField')(max_length=100000)),
             ('model', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('ean', self.gf('django.db.models.fields.IntegerField')()),
-            ('price', self.gf('django.db.models.fields.FloatField')()),
             ('quantity', self.gf('django.db.models.fields.IntegerField')()),
+            ('price', self.gf('django.db.models.fields.FloatField')()),
             ('date_available', self.gf('django.db.models.fields.DateField')()),
             ('date_import', self.gf('django.db.models.fields.DateTimeField')()),
             ('date_update', self.gf('django.db.models.fields.DateTimeField')()),
@@ -55,6 +66,11 @@ class Migration(SchemaMigration):
             ('weight', self.gf('django.db.models.fields.FloatField')()),
             ('manufacturer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['hylee_beauty.Manufacturer'])),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['hylee_beauty.Category'])),
+            ('brand', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['hylee_beauty.Brand'])),
+            ('onsale', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('sale_price', self.gf('django.db.models.fields.FloatField')(default=0.0)),
+            ('sale_date_start', self.gf('django.db.models.fields.DateField')()),
+            ('sale_date_end', self.gf('django.db.models.fields.DateField')()),
         ))
         db.send_create_signal(u'hylee_beauty', ['Product'])
 
@@ -66,6 +82,9 @@ class Migration(SchemaMigration):
         # Deleting model 'Category'
         db.delete_table(u'hylee_beauty_category')
 
+        # Deleting model 'Brand'
+        db.delete_table(u'hylee_beauty_brand')
+
         # Deleting model 'Image'
         db.delete_table(u'hylee_beauty_image')
 
@@ -74,6 +93,15 @@ class Migration(SchemaMigration):
 
 
     models = {
+        u'hylee_beauty.brand': {
+            'Meta': {'object_name': 'Brand'},
+            'description': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Manufacturer']"}),
+            'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
+            'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+        },
         u'hylee_beauty.category': {
             'Meta': {'object_name': 'Category'},
             'description': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
@@ -97,6 +125,7 @@ class Migration(SchemaMigration):
         },
         u'hylee_beauty.product': {
             'Meta': {'object_name': 'Product'},
+            'brand': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Brand']"}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Category']"}),
             'date_available': ('django.db.models.fields.DateField', [], {}),
             'date_import': ('django.db.models.fields.DateTimeField', [], {}),
@@ -111,9 +140,13 @@ class Migration(SchemaMigration):
             'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
             'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'onsale': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'price': ('django.db.models.fields.FloatField', [], {}),
             'product_name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'quantity': ('django.db.models.fields.IntegerField', [], {}),
+            'sale_date_end': ('django.db.models.fields.DateField', [], {}),
+            'sale_date_start': ('django.db.models.fields.DateField', [], {}),
+            'sale_price': ('django.db.models.fields.FloatField', [], {'default': '0.0'}),
             'weight': ('django.db.models.fields.FloatField', [], {})
         }
     }

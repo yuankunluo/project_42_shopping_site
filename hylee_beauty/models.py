@@ -44,6 +44,21 @@ class Category(models.Model):
     def __unicode__(self):
         return "[Category]: " + self.name
 
+class Brand(models.Model):
+    """
+    Brand
+    """
+    name = models.CharField(max_length=200)
+    meta_description = models.TextField(max_length=500)
+    meta_keywords = models.TextField(max_length=500)
+    description = models.TextField(max_length=10000)
+    manufacturer = models.ForeignKey(Manufacturer)
+
+    def __unicode__(self):
+        return "[Brand]: " + self.name
+
+
+
 class Image(models.Model):
     pass
 
@@ -74,25 +89,37 @@ class Product(models.Model):
     category    The category
     enable  Token if this product is sale
     """
-
+    #General
     product_name = models.CharField(max_length=200)
     meta_description = models.TextField(max_length=1000)
     meta_keywords = models.TextField(max_length=1000)
     description = models.TextField(max_length=100000)
+    #Data
     model = models.CharField(max_length=200)
     ean = models.IntegerField()
-    price = models.FloatField()
     quantity = models.IntegerField()
+    price = models.FloatField()
+    #Date
     date_available = models.DateField()
     date_import = models.DateTimeField()
     date_update = models.DateTimeField()
+    #Package
     dimension_length = models.FloatField()
     dimension_height = models.FloatField()
     dimension_width = models.FloatField()
     weight = models.FloatField()
+    #Information
     manufacturer = models.ForeignKey(Manufacturer)
     category = models.ForeignKey(Category)
-    enable = models.BooleanField(default=True)
+    brand = models.ForeignKey(Brand)
+    #Onsale
+    onsale = models.BooleanField(default=False)
+    sale_price = models.FloatField(default=0.0)
+    sale_date_start = models.DateField()
+    sale_date_end = models.DateField()
+    #Enable
+    enabel = models.BooleanField(default=True)
+
 
     def __unicode__(self):
         return "[Product]: " + self.product_name
