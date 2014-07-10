@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hylee_beauty', # add the hylee beauty app into system
 )
 
 MIDDLEWARE_CLASSES = (
