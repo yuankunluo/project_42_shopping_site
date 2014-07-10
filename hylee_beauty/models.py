@@ -7,16 +7,19 @@ from django.db import models
 
 class Manufacturer(models.Model):
     """
-    The Manfacture of products:
+    The Manufacturer of products:
 
     Attributes:
     name    The name of manufacturer
     location    The location of this manufacturer
-    description The descrpton of this manufacturer
+    description The description of this manufacturer
     """
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     description = models.TextField(max_length=1000)
+
+    def __unicode__(self):
+        return "[Manufacturer]: " + self.name
 
 
 class Category(models.Model):
@@ -37,6 +40,9 @@ class Category(models.Model):
     description = models.TextField(max_length=10000)
     parent = models.ForeignKey("self")
     top = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return "[Category]: " + self.name
 
 class Image(models.Model):
     pass
@@ -59,6 +65,7 @@ class Product(models.Model):
     quantity The quantity in stock
     date_available  The avaliable date of this product
     date_import The date this product imported into system
+    date_update The last update time
     dimension_length The dimension
     dimension_height The dimension
     dimension_width The dimension
@@ -76,8 +83,12 @@ class Product(models.Model):
     quantity = models.IntegerField()
     date_available = models.DateField()
     date_import = models.DateTimeField()
+    date_update = models.DateTimeField()
     dimension_length = models.FloatField()
     dimension_height = models.FloatField()
     dimension_width = models.FloatField()
     weight = models.FloatField()
     manufacturer = models.ForeignKey(Manufacturer)
+
+    def __unicode__(self):
+        return "[Product]: " + self.product_name
