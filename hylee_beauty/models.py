@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import date
+from datetime import datetime
 
 # Create your models here.
 
@@ -19,7 +21,7 @@ class Manufacturer(models.Model):
     description = models.TextField(max_length=1000)
 
     def __unicode__(self):
-        return "[Manufacturer]: " + self.name
+        return self.name
 
 
 class Category(models.Model):
@@ -39,10 +41,9 @@ class Category(models.Model):
     meta_keywords = models.TextField(max_length=500)
     description = models.TextField(max_length=10000)
     parent = models.ForeignKey("self")
-    top = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return "[Category]: " + self.name
+        return self.name
 
 class Brand(models.Model):
     """
@@ -55,12 +56,13 @@ class Brand(models.Model):
     manufacturer = models.ForeignKey(Manufacturer)
 
     def __unicode__(self):
-        return "[Brand]: " + self.name
+        return self.name
 
 
 
 class Image(models.Model):
     pass
+
 
 class Product(models.Model):
     """
@@ -96,13 +98,13 @@ class Product(models.Model):
     description = models.TextField(max_length=100000)
     #Data
     model = models.CharField(max_length=200)
-    ean = models.IntegerField()
+    ean = models.CharField(max_length=200)
     quantity = models.IntegerField()
     price = models.FloatField()
     #Date
     date_available = models.DateField()
     date_import = models.DateTimeField()
-    date_update = models.DateTimeField()
+    date_update = models.DateTimeField(datetime.today())
     #Package
     dimension_length = models.FloatField()
     dimension_height = models.FloatField()
@@ -110,7 +112,7 @@ class Product(models.Model):
     weight = models.FloatField()
     #Information
     manufacturer = models.ForeignKey(Manufacturer)
-    category = models.ForeignKey(Category)
+    category = models.ManyToManyField(Category, through='ProductHasCategories')
     brand = models.ForeignKey(Brand)
     #Onsale
     onsale = models.BooleanField(default=False)
@@ -118,8 +120,20 @@ class Product(models.Model):
     sale_date_start = models.DateField()
     sale_date_end = models.DateField()
     #Enable
-    enabel = models.BooleanField(default=True)
+    enable = models.BooleanField(default=True)
 
 
     def __unicode__(self):
-        return "[Product]: " + self.product_name
+        return self.product_name
+
+
+
+class ProductHasCategories(models.Model):
+    """
+    This present the relation many to many from Product and Category
+    """
+    product = models.ForeignKey(Product)
+    category = models.ForeignKey(Category)
+
+
+
