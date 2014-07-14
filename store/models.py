@@ -3,22 +3,32 @@ from datetime import date
 from datetime import datetime
 
 # Create your models here.
-
-
-
-
-class Manufacturer(models.Model):
+class Brand(models.Model):
     """
-    The Manufacturer of products:
-
-    Attributes:
-    name    The name of manufacturer
-    location    The location of this manufacturer
-    description The description of this manufacturer
+    Brand
     """
     name = models.CharField(max_length=200)
-    location = models.CharField(max_length=200)
-    description = models.TextField(max_length=1000)
+    slug = models.SlugField(max_length=50, unique=True,
+                            help_text='Unique value for product page URL, created from name.')
+    # keywords for SEO
+    meta_keywords = models.CharField("Meta Keyword",max_length=255,
+                                     help_text='Comma-delimited set of SEO keywords for meta tag')
+    # description for SEO
+    meta_description = models.CharField("Meta Description", max_length=255,
+                                        help_text='Content for description meta tag')
+    description = models.TextField(max_length=10000)
+
+    class Meta:
+        db_table = 'brands'
+        ordering = ['name']  # order by name A-Z
+        verbose_name_plural = 'Brands'
+
+    @models.permalink
+    def get_absolute_url(self):
+        """
+        Return the better url (slug for this product, it helps for SEO)
+        """
+        return ('brand', (), { 'brand_slug': self.slug })
 
     def __unicode__(self):
         return self.name
@@ -26,105 +36,120 @@ class Manufacturer(models.Model):
 
 class Category(models.Model):
     """
-    The category of a product:
-
-    Attributes:
-    name    Category name
-    meta_description    Html meta tag
-    meta_keywords   Html meta tag
-    description  Description
-    parent  The parent category
-    top The token, if it the top category
+    The Product ORM
     """
-    name = models.CharField(max_length=200)
-    meta_description = models.TextField(max_length=500)
-    meta_keywords = models.TextField(max_length=500)
-    description = models.TextField(max_length=10000)
-    parent = models.ForeignKey("self")
+
+    # product name
+    name = models.CharField(max_length=50)
+    # slug for better url
+    slug = models.SlugField(max_length=50, unique=True,
+                            help_text='Unique value for product page URL, created from name.')
+    # description
+    description = models.TextField()
+    # keywords for SEO
+    meta_keywords = models.CharField("Meta Keyword",max_length=255,
+                                     help_text='Comma-delimited set of SEO keywords for meta tag')
+    # description for SEO
+    meta_description = models.CharField("Meta Description", max_length=255,
+                                        help_text='Content for description meta tag')
+    # the dates
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'categories'
+        ordering = ['name']  # order by name A-Z
+        verbose_name_plural = 'Categories'
+
+    @models.permalink
+    def get_absolute_url(self):
+        """
+        Return the better url (slug for this product, it helps for SEO)
+        """
+        return ('category', (), { 'category_slug': self.slug })
 
     def __unicode__(self):
         return self.name
-
-class Brand(models.Model):
-    """
-    Brand
-    """
-    name = models.CharField(max_length=200)
-    meta_description = models.TextField(max_length=500)
-    meta_keywords = models.TextField(max_length=500)
-    description = models.TextField(max_length=10000)
-    manufacturer = models.ForeignKey(Manufacturer)
-
-    def __unicode__(self):
-        return self.name
-
-
-
-class Image(models.Model):
-    pass
-
 
 class Product(models.Model):
     """
-    The class presents the Product.
-
-    Every Product has the following attributes:
-
-    Attributes:
-
-    product_name    The name of product in system
-    meta_description   The description that displayed in html meta tag
-    meta_description    The keywords that displayed in html meta tag
-    description The html description of this product
-    model   The model of product
-    ean European Article Number
-    price The price
-    quantity The quantity in stock
-    date_available  The avaliable date of this product
-    date_import The date this product imported into system
-    date_update The last update time
-    dimension_length The dimension
-    dimension_height The dimension
-    dimension_width The dimension
-    weight  The weight
-    manufacturer    The manufacturer
-    category    The category
-    enable  Token if this product is sale
+    The Product ORM
     """
-    #General
-    product_name = models.CharField(max_length=200)
-    meta_description = models.TextField(max_length=1000)
-    meta_keywords = models.TextField(max_length=1000)
-    description = models.TextField(max_length=100000)
-    #Data
-    model = models.CharField(max_length=200)
-    ean = models.CharField(max_length=200)
-    quantity = models.IntegerField()
-    price = models.FloatField()
-    #Date
-    date_available = models.DateField()
-    date_import = models.DateTimeField()
-    date_update = models.DateTimeField(datetime.today())
-    #Package
-    dimension_length = models.FloatField()
-    dimension_height = models.FloatField()
-    dimension_width = models.FloatField()
-    weight = models.FloatField()
-    #Information
-    manufacturer = models.ForeignKey(Manufacturer)
-    category = models.ManyToManyField(Category, through='ProductHasCategories')
-    brand = models.ForeignKey(Brand)
-    #Onsale
-    onsale = models.BooleanField(default=False)
-    sale_price = models.FloatField(default=0.0)
-    sale_date_start = models.DateField()
-    sale_date_end = models.DateField()
-    #Enable
-    enable = models.BooleanField(default=True)
 
+    # product name
+    name = models.CharField(max_length=50)
+    # slug for better url
+    slug = models.SlugField(max_length=50, unique=True,
+                            help_text='Unique value for product page URL, created from name.')
+    # keywords for SEO
+    meta_keywords = models.CharField("Meta Keyword",max_length=255,
+                                     help_text='Comma-delimited set of SEO keywords for meta tag')
+    # description for SEO
+    meta_description = models.CharField("Meta Description", max_length=255,
+                                        help_text='Content for description meta tag')
+    # description
+    description = models.TextField()
+    # brand
+    brand = models.ForeignKey(Brand)
+    # SKU code
+    sku = models.CharField(max_length=50, null=True,
+                           help_text='The unique SKU Code for every production')
+    # ASIN code
+    asin = models.CharField(max_length=50, null=True,
+                            help_text='The unique ASIN Code for product in USA')
+    # EAN code
+    ean = models.CharField(max_length=50, null=True,
+                            help_text='The unique EAN Code for product in Europe')
+    # quantity in stock
+    quantity = models.IntegerField()
+
+    # prices & default price
+    # With a max_digits value of 9, and decimal_places value of 2,
+    # we store values with 2 decimal places,
+    # and up to 7 digits to the left of the decimal point.
+    # That means our products can be up to $9,999,999.99
+    onsale_price = models.DecimalField(max_digits=9,decimal_places=2, help_text='The price will be computeted in order, if it onsale')
+    default_price = models.DecimalField(max_digits=9,decimal_places=2, blank=True,default=0.00)
+
+    # tokens
+    is_active = models.BooleanField(default=True)
+    is_bestseller = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=False)
+    is_onsale = models.BooleanField(default=False)
+
+    # category
+    category = models.ManyToManyField(Category, through='ProductHasCategories')
+
+    # the dates
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        db_table = 'products'
+        ordering = ['-created_at']
+        verbose_name_plural = 'Products'
+
+    @models.permalink
+    def get_absolute_url(self):
+        """
+        Return the better url (slug for this product, it helps for SEO)
+        """
+        return ('product', (), { 'product_slug': self.slug })
+
+    def get_price(self):
+        """
+        Using the token is_onsale to determine if this product is in SALES,
+
+        :returns : The price of integer
+        """
+        if self.is_onsale:
+            return self.onsale_price
+        else:
+            return self.default_price
 
     def __unicode__(self):
-        return self.product_name
+        return self.name
 
 
 

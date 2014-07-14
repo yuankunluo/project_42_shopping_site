@@ -8,146 +8,126 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Manufacturer'
-        db.create_table(u'hylee_beauty_manufacturer', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('location', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('description', self.gf('django.db.models.fields.TextField')(max_length=1000)),
-        ))
-        db.send_create_signal(u'store', ['Manufacturer'])
-
-        # Adding model 'Category'
-        db.create_table(u'hylee_beauty_category', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('meta_description', self.gf('django.db.models.fields.TextField')(max_length=500)),
-            ('meta_keywords', self.gf('django.db.models.fields.TextField')(max_length=500)),
-            ('description', self.gf('django.db.models.fields.TextField')(max_length=10000)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Category'])),
-            ('top', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'store', ['Category'])
-
         # Adding model 'Brand'
-        db.create_table(u'hylee_beauty_brand', (
+        db.create_table('brands', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('meta_description', self.gf('django.db.models.fields.TextField')(max_length=500)),
-            ('meta_keywords', self.gf('django.db.models.fields.TextField')(max_length=500)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50)),
+            ('meta_keywords', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('meta_description', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('description', self.gf('django.db.models.fields.TextField')(max_length=10000)),
-            ('manufacturer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Manufacturer'])),
         ))
         db.send_create_signal(u'store', ['Brand'])
 
-        # Adding model 'Image'
-        db.create_table(u'hylee_beauty_image', (
+        # Adding model 'Category'
+        db.create_table('categories', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50)),
+            ('description', self.gf('django.db.models.fields.TextField')()),
+            ('meta_keywords', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('meta_description', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
-        db.send_create_signal(u'store', ['Image'])
+        db.send_create_signal(u'store', ['Category'])
 
         # Adding model 'Product'
-        db.create_table(u'hylee_beauty_product', (
+        db.create_table('products', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('product_name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('meta_description', self.gf('django.db.models.fields.TextField')(max_length=1000)),
-            ('meta_keywords', self.gf('django.db.models.fields.TextField')(max_length=1000)),
-            ('description', self.gf('django.db.models.fields.TextField')(max_length=100000)),
-            ('model', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('ean', self.gf('django.db.models.fields.IntegerField')()),
-            ('quantity', self.gf('django.db.models.fields.IntegerField')()),
-            ('price', self.gf('django.db.models.fields.FloatField')()),
-            ('date_available', self.gf('django.db.models.fields.DateField')()),
-            ('date_import', self.gf('django.db.models.fields.DateTimeField')()),
-            ('date_update', self.gf('django.db.models.fields.DateTimeField')()),
-            ('dimension_length', self.gf('django.db.models.fields.FloatField')()),
-            ('dimension_height', self.gf('django.db.models.fields.FloatField')()),
-            ('dimension_width', self.gf('django.db.models.fields.FloatField')()),
-            ('weight', self.gf('django.db.models.fields.FloatField')()),
-            ('manufacturer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Manufacturer'])),
-            ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Category'])),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50)),
+            ('meta_keywords', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('meta_description', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('description', self.gf('django.db.models.fields.TextField')()),
             ('brand', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Brand'])),
-            ('onsale', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('sale_price', self.gf('django.db.models.fields.FloatField')(default=0.0)),
-            ('sale_date_start', self.gf('django.db.models.fields.DateField')()),
-            ('sale_date_end', self.gf('django.db.models.fields.DateField')()),
+            ('sku', self.gf('django.db.models.fields.CharField')(max_length=50, null=True)),
+            ('asin', self.gf('django.db.models.fields.CharField')(max_length=50, null=True)),
+            ('ean', self.gf('django.db.models.fields.CharField')(max_length=50, null=True)),
+            ('quantity', self.gf('django.db.models.fields.IntegerField')()),
+            ('onsale_price', self.gf('django.db.models.fields.DecimalField')(max_digits=9, decimal_places=2)),
+            ('default_price', self.gf('django.db.models.fields.DecimalField')(default=0.0, max_digits=9, decimal_places=2, blank=True)),
+            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('is_bestseller', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('is_featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('is_onsale', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
         db.send_create_signal(u'store', ['Product'])
 
+        # Adding model 'ProductHasCategories'
+        db.create_table(u'store_producthascategories', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('product', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Product'])),
+            ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Category'])),
+        ))
+        db.send_create_signal(u'store', ['ProductHasCategories'])
+
 
     def backwards(self, orm):
-        # Deleting model 'Manufacturer'
-        db.delete_table(u'hylee_beauty_manufacturer')
+        # Deleting model 'Brand'
+        db.delete_table('brands')
 
         # Deleting model 'Category'
-        db.delete_table(u'hylee_beauty_category')
-
-        # Deleting model 'Brand'
-        db.delete_table(u'hylee_beauty_brand')
-
-        # Deleting model 'Image'
-        db.delete_table(u'hylee_beauty_image')
+        db.delete_table('categories')
 
         # Deleting model 'Product'
-        db.delete_table(u'hylee_beauty_product')
+        db.delete_table('products')
+
+        # Deleting model 'ProductHasCategories'
+        db.delete_table(u'store_producthascategories')
 
 
     models = {
         u'store.brand': {
-            'Meta': {'object_name': 'Brand'},
+            'Meta': {'ordering': "['name']", 'object_name': 'Brand', 'db_table': "'brands'"},
             'description': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Manufacturer']"}),
-            'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
-            'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+            'meta_description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'meta_keywords': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50'})
         },
         u'store.category': {
-            'Meta': {'object_name': 'Category'},
-            'description': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
+            'Meta': {'ordering': "['name']", 'object_name': 'Category', 'db_table': "'categories'"},
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
-            'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Category']"}),
-            'top': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
-        },
-        u'store.image': {
-            'Meta': {'object_name': 'Image'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        },
-        u'store.manufacturer': {
-            'Meta': {'object_name': 'Manufacturer'},
-            'description': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+            'meta_description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'meta_keywords': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50'}),
+            'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
         u'store.product': {
-            'Meta': {'object_name': 'Product'},
+            'Meta': {'ordering': "['-created_at']", 'object_name': 'Product', 'db_table': "'products'"},
+            'asin': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True'}),
             'brand': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Brand']"}),
-            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Category']"}),
-            'date_available': ('django.db.models.fields.DateField', [], {}),
-            'date_import': ('django.db.models.fields.DateTimeField', [], {}),
-            'date_update': ('django.db.models.fields.DateTimeField', [], {}),
-            'description': ('django.db.models.fields.TextField', [], {'max_length': '100000'}),
-            'dimension_height': ('django.db.models.fields.FloatField', [], {}),
-            'dimension_length': ('django.db.models.fields.FloatField', [], {}),
-            'dimension_width': ('django.db.models.fields.FloatField', [], {}),
-            'ean': ('django.db.models.fields.IntegerField', [], {}),
+            'category': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['store.Category']", 'through': u"orm['store.ProductHasCategories']", 'symmetrical': 'False'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'default_price': ('django.db.models.fields.DecimalField', [], {'default': '0.0', 'max_digits': '9', 'decimal_places': '2', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {}),
+            'ean': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Manufacturer']"}),
-            'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
-            'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'onsale': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'price': ('django.db.models.fields.FloatField', [], {}),
-            'product_name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'is_bestseller': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_onsale': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'meta_description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'meta_keywords': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'onsale_price': ('django.db.models.fields.DecimalField', [], {'max_digits': '9', 'decimal_places': '2'}),
             'quantity': ('django.db.models.fields.IntegerField', [], {}),
-            'sale_date_end': ('django.db.models.fields.DateField', [], {}),
-            'sale_date_start': ('django.db.models.fields.DateField', [], {}),
-            'sale_price': ('django.db.models.fields.FloatField', [], {'default': '0.0'}),
-            'weight': ('django.db.models.fields.FloatField', [], {})
+            'sku': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50'}),
+            'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
+        },
+        u'store.producthascategories': {
+            'Meta': {'object_name': 'ProductHasCategories'},
+            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Category']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'product': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Product']"})
         }
     }
 
