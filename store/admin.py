@@ -6,7 +6,7 @@ from django.contrib import admin
 # ====================
 # ProductHasCategory Admin
 # ====================
-from hylee_beauty.models import ProductHasCategories
+from store.models import ProductHasCategories
 class ProductHasCategoryAdmin(admin.TabularInline):
     model = ProductHasCategories
     max_num = 10
@@ -15,7 +15,7 @@ class ProductHasCategoryAdmin(admin.TabularInline):
 # ====================
 # Product Admin
 # ====================
-from hylee_beauty.models import Product
+from store.models import Product
 class ProductAdmin(admin.ModelAdmin):
     """
     Using customer admin
@@ -39,7 +39,7 @@ admin.site.register(Product,ProductAdmin)
 # ====================
 # Manufacturer Admin
 # ====================
-from hylee_beauty.models import Manufacturer
+from store.models import Manufacturer
 admin.site.register(Manufacturer)
 
 
@@ -47,5 +47,5 @@ admin.site.register(Manufacturer)
 # ====================
 # Category Admin
 # ====================
-from hylee_beauty.models import Category
+from store.models import Category
 admin.site.register(Category)

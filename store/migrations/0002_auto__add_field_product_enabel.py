@@ -20,40 +20,40 @@ class Migration(SchemaMigration):
 
 
     models = {
-        u'hylee_beauty.brand': {
+        u'store.brand': {
             'Meta': {'object_name': 'Brand'},
             'description': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Manufacturer']"}),
+            'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Manufacturer']"}),
             'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
             'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200'})
         },
-        u'hylee_beauty.category': {
+        u'store.category': {
             'Meta': {'object_name': 'Category'},
             'description': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
             'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Category']"}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Category']"}),
             'top': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
-        u'hylee_beauty.image': {
+        u'store.image': {
             'Meta': {'object_name': 'Image'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
-        u'hylee_beauty.manufacturer': {
+        u'store.manufacturer': {
             'Meta': {'object_name': 'Manufacturer'},
             'description': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200'})
         },
-        u'hylee_beauty.product': {
+        u'store.product': {
             'Meta': {'object_name': 'Product'},
-            'brand': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Brand']"}),
-            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Category']"}),
+            'brand': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Brand']"}),
+            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Category']"}),
             'date_available': ('django.db.models.fields.DateField', [], {}),
             'date_import': ('django.db.models.fields.DateTimeField', [], {}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {}),
@@ -64,7 +64,7 @@ class Migration(SchemaMigration):
             'ean': ('django.db.models.fields.IntegerField', [], {}),
             'enabel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['hylee_beauty.Manufacturer']"}),
+            'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Manufacturer']"}),
             'meta_description': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
             'meta_keywords': ('django.db.models.fields.TextField', [], {'max_length': '1000'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
@@ -79,4 +79,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['hylee_beauty']
+    complete_apps = ['store']
