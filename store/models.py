@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import date
 from datetime import datetime
+from store.tools import path_and_rename
+from project_42_shopping_site import settings
 
 # Create your models here.
 #==========================================================================
@@ -99,15 +101,11 @@ class Product(models.Model):
     description = models.TextField()
     # brand
     brand = models.ForeignKey(Brand)
-    # SKU code
-    sku = models.CharField(max_length=50, null=True,
-                           help_text='The unique SKU Code for every production')
-    # ASIN code
-    asin = models.CharField(max_length=50, null=True,
-                            help_text='The unique ASIN Code for product in USA')
-    # EAN code
-    ean = models.CharField(max_length=50, null=True,
-                            help_text='The unique EAN Code for product in Europe')
+
+    # ASIN/EAN code
+    code = models.CharField(max_length=50, null=True, blank=True,
+                            help_text='The unique ASIN/Ean Code for product')
+
     # quantity in stock
     quantity = models.IntegerField()
 
@@ -116,9 +114,8 @@ class Product(models.Model):
     # we store values with 2 decimal places,
     # and up to 7 digits to the left of the decimal point.
     # That means our products can be up to $9,999,999.99
-    onsale_price = models.DecimalField(max_digits=9,decimal_places=2, help_text='The price will be computeted in order, if it onsale')
-    default_price = models.DecimalField(max_digits=9,decimal_places=2, blank=True,default=0.00)
-
+    default_price = models.DecimalField(max_digits=9,decimal_places=2, blank=False,default=0.00)
+    onsale_price = models.DecimalField(max_digits=9,decimal_places=2, blank=False, help_text='The price will be computeted in order, if it onsale')
     # tokens
     is_active = models.BooleanField(default=True)
     is_bestseller = models.BooleanField(default=False)
@@ -131,6 +128,12 @@ class Product(models.Model):
     # the dates
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # featured image and thumbnail
+    image = models.ImageField(upload_to='store/static/store/image/product/',
+                                       null=True)
+    image_caption = models.CharField(max_length=200,
+                                     null=True)
 
 
     class Meta:
@@ -169,6 +172,8 @@ class ProductHasCategories(models.Model):
     """
     product = models.ForeignKey(Product)
     category = models.ForeignKey(Category)
+
+
 
 
 

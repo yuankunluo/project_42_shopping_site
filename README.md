@@ -4,12 +4,12 @@ project_42_shopping_site
 Project 42
 -----------------------
 
-Universitaet Duesseldorf Infowiss Projectseminar
+    Universitaet Duesseldorf Infowiss Projectseminar 2014 Summer.
 
-Authors:
-    * Yuankun
-    * Tobias
-    * Hylee
+    Authors:
+        * Yuankun
+        * Tobias
+        * Hylee
 
 Install
 -----------------------
@@ -24,6 +24,13 @@ Install
     But under windows, you must install python, that can be done by downloading the python2.7's exe.
     :_)
 
+Required Packages
+-----------------------
+
+    This project relays on the following packages
+    * django
+    * pil
+    * south
 
 IDE
 -----------------------

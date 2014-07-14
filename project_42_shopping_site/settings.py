@@ -64,6 +64,11 @@ DATABASES = {
     }
 }
 
+# General Setting
+SITE_NAME = 'Project 42 Store'
+META_KEYWORDS = 'HHU Information Science'
+META_DESCRIPTION = 'HHU Information Science Project Seminar 42 Summer 2014'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 

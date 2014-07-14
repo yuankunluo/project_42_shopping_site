@@ -4,6 +4,14 @@ from django.contrib import admin
 
 
 #==========================================================================
+# ProductHasCategoryAdmin
+#==========================================================================
+from store.models import ProductHasCategories
+class ProductHasCategoryAdmin(admin.TabularInline):
+    model = ProductHasCategories
+    max_num = 10
+
+#==========================================================================
 # ProductAdmin
 #==========================================================================
 from store.models import Product
@@ -18,18 +26,10 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description', 'meta_keywords', 'meta_description']
     exclude = ('created_at', 'updated_at',)
     # sets up slug to be generated from product name
-    prepopulated_fields = {'slug' : ('name',)}
+    prepopulated_fields = {'slug':('name',), 'onsale_price':('default_price',),
+                           'image_caption':('slug',)}
+    inlines = [ProductHasCategoryAdmin,]
 admin.site.register(Product,ProductAdmin)
-
-
-#==========================================================================
-# ProductHasCategoryAdmin
-#==========================================================================
-from store.models import ProductHasCategories
-class ProductHasCategoryAdmin(admin.TabularInline):
-    model = ProductHasCategories
-    max_num = 10
-
 
 #==========================================================================
 # Category Admin
@@ -44,12 +44,15 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description', 'meta_keywords', 'meta_description']
     exclude = ('created_at', 'updated_at',)
     # sets up slug to be generated from category name
-    prepopulated_fields = {'slug' : ('name',)}
-    
+    prepopulated_fields = {'slug':('name',)}
+
 admin.site.register(Category, CategoryAdmin)
 
 #==========================================================================
 # Brand Admin
 #==========================================================================
 from store.models import Brand
-admin.site.register(Brand)
+class Branddmin(admin.ModelAdmin):
+    # sets up slug to be generated from category name
+    prepopulated_fields = {'slug':('name',)}
+admin.site.register(Brand, Branddmin)
