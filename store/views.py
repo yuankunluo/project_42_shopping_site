@@ -7,7 +7,9 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-
+#==========================================================================
+# Index
+#==========================================================================
 def index(request):
 
     return render(request,'store/index.html')

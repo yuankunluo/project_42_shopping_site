@@ -3,6 +3,9 @@ from datetime import date
 from datetime import datetime
 
 # Create your models here.
+#==========================================================================
+# Brand
+#==========================================================================
 class Brand(models.Model):
     """
     Brand
@@ -33,7 +36,9 @@ class Brand(models.Model):
     def __unicode__(self):
         return self.name
 
-
+#==========================================================================
+# Category
+#==========================================================================
 class Category(models.Model):
     """
     The Product ORM
@@ -71,6 +76,9 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+#==========================================================================
+# Product
+#==========================================================================
 class Product(models.Model):
     """
     The Product ORM
@@ -152,7 +160,9 @@ class Product(models.Model):
         return self.name
 
 
-
+#==========================================================================
+# ProductHasCategories
+#==========================================================================
 class ProductHasCategories(models.Model):
     """
     This present the relation many to many from Product and Category
