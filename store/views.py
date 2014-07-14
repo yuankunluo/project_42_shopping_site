@@ -12,4 +12,4 @@ from django.http import HttpResponse
 #==========================================================================
 def index(request):
 
-    return render(request,'store/index.html')
+    return render(request,'store/base.html',{'title':'hello','active':'account'})
