@@ -1,0 +1,67 @@
+{% extends 'store/base.html' %}
+
+{% block title%}Register{% endblock %}
+
+{% block content %}
+<h1>New User Register</h1>
+        <h2>If you have an account, please <a class="btn btn-warning" href="/account/login/">Login</a></h2>
+
+<hr/>
+
+<form action="/account/register/" method="post" class="form-horizontal pager">
+    {% csrf_token %}
+    <div class="control-group">
+        <label class="control-label" for="username">Username</label>
+
+        <div class="controls">
+            <input type="text" name='username' id="username" placeholder="Username">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="firstname">Firstname</label>
+        <div class="controls">
+            <input type="text" name="firstname" id="firstname" placeholder="Firstname">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="lastname">Lastname</label>
+        <div class="controls">
+            <input type="text" name="lastname" id="lastname" placeholder="Lastname">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="password1">Password</label>
+
+        <div class="controls">
+            <input type="password" name="password1" id="password1" placeholder="Password">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="password2">Password</label>
+
+        <div class="controls">
+            <input type="password" name="password2" id="password2" placeholder="Password">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+            <input type="text" name="email" id="email" placeholder="Email">
+        </div>
+    </div>
+
+
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-success">Register</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

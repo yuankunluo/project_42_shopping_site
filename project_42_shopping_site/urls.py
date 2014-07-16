@@ -14,9 +14,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$',store_views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^store/',include(store_urls)), # redirect all urls to store
-    url(r'^product/$',store_views.product_all,name='product_all'),
-    url(r'^account/', include(auth_url)),
-    url(r'^account/',include(account_urls)),
-    url(r'^cart/',include(cart_urls)),
+    url(r'^store/', include(store_urls)), # redirect all urls to store
+    url(r'^product/$', store_views.product_all),
+    url(r'^account/', include(account_urls)),
+    url(r'^cart/', include(cart_urls)),
 )

@@ -11,7 +11,7 @@ import cart
 def show_cart(request):
     cart_items = cart.get_cart_items(request)
     cart_subtotal = cart.cart_subtotal(request)
-    return render(request,'cart/cart.html',{'cart_items':cart_items,'cart_subtotal':cart_subtotal})
+    return render(request,'cart/cart.html',{'cart_items':cart_items,'cart_subtotal':cart_subtotal, 'user':request.user})
 
 
 def add_product_to_cart(request, product_slug):

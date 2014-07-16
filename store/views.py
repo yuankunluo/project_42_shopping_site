@@ -15,7 +15,7 @@ from store.models import Product
 #==========================================================================
 def index(request):
 
-    return render(request,'store/base.html',{'title':'hello','active':'account'})
+    return render(request,'store/base.html',{'title':'hello','active':'account', 'user':request.user})
 
 #==========================================================================
 # Product
@@ -26,7 +26,7 @@ def product_all(request):
     for p in products:
         p.img_url = p.image.url[6:]
     return render(request,'store/product_list.html',
-                  {'title':'hello','active':'product','products':products})
+                  {'title':'hello','active':'product','products':products, 'user':request.user})
 
 @require_GET
 def product_slug(request, product_slug):
@@ -37,8 +37,8 @@ def product_slug(request, product_slug):
     for cn in categories:
         c.append(cn.name)
     return render(request,'store/product_page.html',
-                  {'title':'hello','active':'product','product':product,'categories':c})
+                  {'title':'hello','active':'product','product':product,'categories':c, 'user':request.user})
 
 @require_GET
 def product_id(request, product_id):
-    return render(request,'store/base.html',{'title':'hello','active':'account'})
+    return render(request,'store/base.html',{'title':'hello','active':'account', 'user':request.user})
