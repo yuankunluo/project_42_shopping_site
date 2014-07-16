@@ -22,8 +22,11 @@
 
                 <div class="row">
                     <div class="span7">
-                        <form action="#" method="post">
-                            <input class="input-medium" type="number" name="quantity" value="1">
+                        <form action="/cart/add/{{product.slug}}/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="product_slug" name="product_slug" value="{{product.slug}}">
+                            <label for="quantity">Quantity</label>
+                            <input class="input-medium" type="number" id="quantity" name="quantity" value="1">
                             <input type="submit" class="btn btn-large btn-info" value="Add to Cart">
                         </form>
                     </div>

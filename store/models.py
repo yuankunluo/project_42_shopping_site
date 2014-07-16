@@ -164,6 +164,12 @@ class Product(models.Model):
     def __unicode__(self):
         return self.name
 
+    def price(self):
+        if self.is_onsale:
+            return self.onsale_price
+        else:
+            return self.default_price
+
 
 #==========================================================================
 # ProductHasCategories

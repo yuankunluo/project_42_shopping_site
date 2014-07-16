@@ -1,0 +1,68 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+
+<h1 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Shopping Cart</h1>
+        <hr/>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th colspan="2">Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody
+{% for ci in cart_items %}
+        <tr>
+            <td>
+                <a href="/store/product/{{ci.product.slug}}">{{ci.product.name}}</a>
+            </td>
+            <td>
+                {% if ci.product.is_onsale %}
+                    {{ci.product.onsale_price}}
+                {% else %}
+                    {{ci.product.default_price}}
+                {% endif %}
+            </td>
+            <td>
+                <form method="post" action="/cart/update/" class="form-inline">
+                    {% csrf_token %}
+                    <input type="text" class="search-query" size="4" name="quantity" value="{{ ci.quantity }}">
+                    <input type="hidden" name="item_id" value="{{ ci.id }}" />
+                    <input class="btn btn-warning pull-right" type="submit" name="submit" value="Update" />
+                </form>
+            </td>
+            <td>
+                <form method="post" action="/cart/remove/" class="form-inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ ci.id }}" />
+                    <input class="btn btn-danger" type="submit" name="submit" value="Remove" />
+                </form>
+            </td>
+            <td>
+                {{ci.total}}
+            </td>
+        </tr>
+
+{% endfor %}
+
+    </tbody>
+</table>
+        <hr/>
+        <div class="row">
+            <div class="span6 offset6">
+                <form>
+                    <h2>Total: {{cart_subtotal}}</h2>
+                    <input type="hidden" name="total" id="total" value="{{cart_subtotal}}">
+                    <input type="submit" class="btn btn-success btn-block" name="checkout" value="checkout">
+                </form>
+            </div>
+        </div>
+
+
+{% endblock %}
