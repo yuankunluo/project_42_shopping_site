@@ -26,8 +26,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description', 'meta_keywords', 'meta_description']
     exclude = ('created_at', 'updated_at',)
     # sets up slug to be generated from product name
-    prepopulated_fields = {'slug':('name',), 'onsale_price':('default_price',),
-                           'image_caption':('slug',)}
+    prepopulated_fields = {'slug':('name',)}
     inlines = [ProductHasCategoryAdmin,]
 admin.site.register(Product,ProductAdmin)
 

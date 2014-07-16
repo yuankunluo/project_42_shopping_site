@@ -36,8 +36,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'south', # using south to maitain the dbs
+    # 'south', # using south to maitain the dbs
     'store', # add the hylee beauty app into system
+    # 'cart', # the cart systmen
 )
 
 MIDDLEWARE_CLASSES = (

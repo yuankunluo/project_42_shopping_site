@@ -3,6 +3,7 @@ from datetime import date
 from datetime import datetime
 from store.tools import path_and_rename
 from project_42_shopping_site import settings
+from django.core.files.storage import FileSystemStorage
 
 # Create your models here.
 #==========================================================================
@@ -129,8 +130,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
     # featured image and thumbnail
-    image = models.ImageField(upload_to='store/static/store/image/product/',
+    image = models.ImageField(upload_to='store/static/store/image/product',
                                        null=True)
     image_caption = models.CharField(max_length=200,
                                      null=True)

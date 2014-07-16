@@ -27,7 +27,7 @@ Install
 Required Packages
 -----------------------
 
-    This project relays on the following packages
+    This project relys on the following packages
     * django
     * pil
     * south
