@@ -24,9 +24,9 @@
             </td>
             <td>
                 {% if ci.product.is_onsale %}
-                    {{ci.product.onsale_price}}
+                   $ {{ci.product.onsale_price}}
                 {% else %}
-                    {{ci.product.default_price}}
+                   $ {{ci.product.default_price}}
                 {% endif %}
             </td>
             <td>
@@ -45,7 +45,7 @@
                 </form>
             </td>
             <td>
-                {{ci.total}}
+                $ {{ci.total}}
             </td>
         </tr>
 
@@ -57,7 +57,7 @@
         <div class="row">
             <div class="span6 offset6">
                 <form>
-                    <h2>Total: {{cart_subtotal}}</h2>
+                    <h2>Total: $ {{cart_subtotal}}</h2>
                     <input type="hidden" name="total" id="total" value="{{cart_subtotal}}">
                     <input type="submit" class="btn btn-success btn-block" name="checkout" value="checkout">
                 </form>
