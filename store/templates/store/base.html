@@ -77,9 +77,10 @@
 
             </ul>
 
-            <form class="navbar-form navbar-right" role="form">
+            <form action="/store/search/" method="post" class="navbar-form navbar-right" role="form">
+                {% csrf_token %}
                 <div class="form-group">
-                    <input type="text" placeholder="Search" class="form-control">
+                    <input type="text" name="search_term" id="search_term" placeholder="Search" class="form-control" required>
                 </div>
                 <button id="search" type="submit" class="btn btn-success">Search</button>
             </form>

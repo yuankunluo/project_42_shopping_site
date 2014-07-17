@@ -38,6 +38,19 @@ def product_slug(request, product_slug):
     return render(request,'store/product_page.html',
                   {'title':'hello','active':'product','product':product,'categories':c, 'user':request.user})
 
+
+
+def product_search(request):
+    """
+    @TODO
+    :param request:
+    :return:
+    """
+    search_term = request.POST['search_term']
+    products = []
+    return HttpResponseRedirect('/product/')
+
+
 @require_GET
 def product_id(request, product_id):
     return render(request,'store/base.html',{'title':'hello','active':'account', 'user':request.user})
