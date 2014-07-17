@@ -9,6 +9,7 @@ class CartItem(models.Model):
     quantity = models.IntegerField(default=1)
     product = models.ForeignKey(Product, unique=False)
 
+
     class Meta:
         db_table = 'cart_items'
         ordering = ['date_added']

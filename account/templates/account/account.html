@@ -5,7 +5,19 @@
 {% block content %}
    {% if user.is_authenticated %}
 <h1>Welcome, {{ user.username }}. Thanks for logging in.</h1>
+<hr/>
+        <h2>Your Orders:</h2>
+        <div class="well">
+        {% for order in orders %}
+            <div class="row">
+            <span class="span2 label label-info">{{order.created_at}}</span>
+            <a class="span6" href="/account/order/{{order.order_id}}/">{{order.order_id}}</a>
+            <span class="span4">Total Price: {{order.total_price}}</span>
+            </div>
+        {% endfor %}
+        </div>
 {% else %}
 <p>Welcome. Please <a href="/account/login/">log in</a>.</p>
+
 {% endif %}
 {% endblock %}

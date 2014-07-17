@@ -3,7 +3,7 @@ from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-
+from django.http.response import HttpResponseRedirect
 from store.models import Product
 
 
@@ -14,8 +14,7 @@ from store.models import Product
 # Index
 #==========================================================================
 def index(request):
-
-    return render(request,'store/base.html',{'title':'hello','active':'account', 'user':request.user})
+    return HttpResponseRedirect('/product/')
 
 #==========================================================================
 # Product

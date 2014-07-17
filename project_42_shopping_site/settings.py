@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'south', # using south to maitain the dbs
+    'south', # using south to maitain the dbs
     'store', # add the hylee beauty app into app
     'cart', # the cart app
     'account',# the account app

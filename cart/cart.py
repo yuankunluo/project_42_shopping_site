@@ -73,6 +73,13 @@ def get_single_item(request, item_id):
     return get_object_or_404(CartItem, id=item_id, cart_id=_cart_id(request))
 
 def update_cart(request):
+    """
+    Using the request information
+    to update the cart.
+
+    :param request:
+    :return:
+    """
     postdata = request.POST.copy()
     item_id = postdata['item_id']
     quantity = postdata['quantity']
@@ -86,6 +93,12 @@ def update_cart(request):
 
 
 def remove_from_cart(request):
+    """
+    Response to the REMOVE button
+
+    :param request:
+    :return:
+    """
     postdata = request.POST.copy()
     item_id = postdata['item_id']
     cart_item = get_single_item(request, item_id)
@@ -93,6 +106,12 @@ def remove_from_cart(request):
         cart_item.delete()
 
 def cart_subtotal(request):
+    """
+    Calculate the total price
+
+    :param request:
+    :return:
+    """
     cart_total = decimal.Decimal('0.00')
     cart_products = get_cart_items(request)
     for cart_item in cart_products:

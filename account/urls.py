@@ -8,5 +8,7 @@ urlpatterns = patterns('',
                        url(r'^logout/$',account_views.do_logout),
                        url(r'^order/$',account_views.order),
                        url(r'^register/$', account_views.register, name='register'),
-                       url(r'^order/(?P<order_id>\d+)/$', account_views.order_detail, name='order_detail'),
+                       url(r'^checkout/$', account_views.checkout, name='checkout'),
+                       url(r'^pay/$',account_views.pay, name='pay'),
+                       url(r'^order/(?P<order_id>\S+)/$', account_views.order_detail, name='order_detail'),
 )

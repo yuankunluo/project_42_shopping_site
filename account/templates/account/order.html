@@ -1,0 +1,54 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Order- {{ order.order_id }}{% endblock %}
+
+{% block content %}
+
+<h1>Order Detail</h1>
+        <hr/>
+<h4>OrderID: {{ order.order_id }}</h4>
+<h4>Order Date: {{ order.created_at}}</h4>
+<h4>Order Total Price: {{ order.total_price }}</h4>
+<hr/>
+<div class="well">
+    Shipping To: {{order.shipping_to}}
+    <br/>
+    Shipping Address: {{order.shipping_add}}
+    <br/>
+    Shipping ZIP Code: {{order.shipping_zip}}
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody
+{% for ci in cart_items %}
+        <tr>
+            <td>
+                <a href="/store/product/{{ci.product.slug}}">{{ci.product.name}}</a>
+            </td>
+            <td>
+                {% if ci.product.is_onsale %}
+                   $ {{ci.product.onsale_price}}
+                {% else %}
+                   $ {{ci.product.default_price}}
+                {% endif %}
+            </td>
+            <td>
+                {{ ci.quantity }}
+            </td>
+            <td>
+                $ {{ci.total}}
+            </td>
+        </tr>
+{% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}
