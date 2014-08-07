@@ -6,3 +6,21 @@ body {
 form .line {
     margin-bottom: 5px; //adjust to your liking
 }
+
+
+
+/* customer style Yuankun LUO */
+
+.carousel-inner > .item > img {
+    height: 300px;
+    max-height: 300px;
+    min-height: 300px;
+}
+
+.carousel-caption > p {
+    color: black;
+}
+
+.carousel-caption > h3 {
+    color: black;
+}
