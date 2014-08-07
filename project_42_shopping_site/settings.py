@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'store', # add the hylee beauty app into app
     'cart', # the cart app
     'account',# the account app
+    'homepage',# the homepage app
 )
 
 MIDDLEWARE_CLASSES = (
