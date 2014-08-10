@@ -39,7 +39,7 @@ def product_slug(request, product_slug):
                   {'title':'hello','active':'product','product':product,'categories':c, 'user':request.user})
 
 
-
+@require_POST
 def product_search(request):
     """
     @TODO
@@ -47,8 +47,11 @@ def product_search(request):
     :return:
     """
     search_term = request.POST['search_term']
-    products = []
-    return HttpResponseRedirect('/product/')
+    search_term.
+    products = Product.objects.all()
+    results = []
+
+    return render(request,'store/search_result.html',{'search_term':search_term})
 
 
 @require_GET
