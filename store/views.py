@@ -47,7 +47,6 @@ def product_search(request):
     :return:
     """
     search_term = request.POST['search_term']
-    search_term.
     products = Product.objects.all()
     results = []
 
