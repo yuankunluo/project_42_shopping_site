@@ -43,14 +43,30 @@ def product_slug(request, product_slug):
 def product_search(request):
     """
     @TODO
-    :param request:
-    :return:
-    """
-    search_term = request.POST['search_term']
-    products = Product.objects.all()
-    results = []
+    Only search for name and description
 
-    return render(request,'store/search_result.html',{'search_term':search_term})
+
+    :param request: the search term, get from the request
+    :return: the search results
+    """
+    import re
+    search_term = request.POST['search_term'].lower()
+    s_pattern = re.compile(search_term)
+    products = Product.objects.all()
+    keys = ['meta_description', 'meta_keywords', 'name', 'description']
+    results = []
+    for p in products:
+        p.img_url = p.image.url[6:]
+        string = ''
+        for k in keys:
+            string += p.__dict__[k] # get all information
+        string = string.lower() # make it lowercase
+        finds = re.findall(s_pattern, string)
+        if len(finds) != 0:
+            results.append(p)
+            continue
+
+    return render(request,'store/search_result.html',{'search_term':search_term,'results':results})
 
 
 @require_GET
