@@ -1,12 +1,12 @@
 {% extends 'store/base.html' %}
-
+{% load i18n %}
 {% block title%}Account{% endblock %}
 
 {% block content %}
    {% if user.is_authenticated %}
 <h1>Welcome, {{ user.username }}. Thanks for logging in.</h1>
 <hr/>
-        <h2>Your Orders:</h2>
+        <h2>{% trans "Your Orders:" %}</h2>
         <div class="well">
         {% for order in orders %}
             <div class="row">
