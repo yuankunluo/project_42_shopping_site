@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 10:52+0800\n"
+"POT-Creation-Date: 2014-08-24 11:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgid "Product"
 msgstr ""
 
 #: account/templates/account/checkout.html:14
-#: account/templates/account/order.html:25
+#: account/templates/account/order.html:25 cart/templates/cart/cart.html:14
 #: store/templates/store/product_page.html:16
 #: store/templates/store/product_page.html:19
 msgid "Price"
@@ -171,8 +171,12 @@ msgstr ""
 msgid "Shopping Cart"
 msgstr ""
 
-#: homepage/templates/homepage/homepage.html:3
-msgid "Homepage"
+#: cart/templates/cart/cart.html:37
+msgid "Update"
+msgstr ""
+
+#: cart/templates/cart/cart.html:44
+msgid "Remove"
 msgstr ""
 
 #: homepage/templates/homepage/homepage.html:56

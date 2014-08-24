@@ -1,5 +1,5 @@
 {% extends 'store/base.html' %}
-
+{% load i18n %}
 {% block title %}{% trans "Shopping Cart" %}{% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th>{% trans "Product" %}</th>
-            <th>{% "Price" %}</th>
+            <th>{% trans "Price" %}</th>
             <th colspan="2">{% trans "Quantity" %}</th>
             <th>{% trans "Total" %}</th>
         </tr>
@@ -34,14 +34,14 @@
                     {% csrf_token %}
                     <input type="text" class="search-query" size="4" name="quantity" value="{{ ci.quantity }}">
                     <input type="hidden" name="item_id" value="{{ ci.id }}" />
-                    <input class="btn btn-warning pull-right" type="submit" name="submit" value="Update" />
+                    <input class="btn btn-warning pull-right" type="submit" name="submit" value="{% trans "Update" %}" />
                 </form>
             </td>
             <td>
                 <form method="post" action="/cart/remove/" class="form-inline">
                     {% csrf_token %}
                     <input type="hidden" name="item_id" value="{{ ci.id }}" />
-                    <input class="btn btn-danger" type="submit" name="submit" value="Remove" />
+                    <input class="btn btn-danger" type="submit" name="submit" value="{% trans "Remove" %}" />
                 </form>
             </td>
             <td>
