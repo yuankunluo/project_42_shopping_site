@@ -49,29 +49,29 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="{% if active == 'home' %}active{% endif %}"><a href="/">Home</a></li>
-                <li class="{% if active == 'product' %}active{% endif %}"><a href="/product">Product</a></li>
+                <li class="{% if active == 'home' %}active{% endif %}"><a href="/">{% trans "Home" %}</a></li>
+                <li class="{% if active == 'product' %}active{% endif %}"><a href="/product">{% trans "Product" %}</a></li>
 
 
                 <li class="dropdown {% if active == 'account' %}active{% endif %}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Account" %}<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                        {% if user.is_authenticated %}
-                        <li><a href="#">Hi: {{user.username}}!</a></li>
+                        <li><a href="#">{% trans "Hi" %}: {{user.username}}!</a></li>
                         <li class="divider"></li>
-                        <li><a href="/account/">My Account</a></li>
-                        <li><a href="/account/order/">Order History</a></li>
+                        <li><a href="/account/">{% trans "My Account" %}</a></li>
+                        <li><a href="/account/order/">{% trans "Order History" %}</a></li>
                         <li class="divider"></li>
-                        <li><a href="/account/logout/">Logout</a></li>
+                        <li><a href="/account/logout/">{% trans "Logout" %}</a></li>
                         {% else %}
-                        <li><a href="/account/login/">Login</a></li>
-                        <li><a href="/account/register/">Register</a></li>
+                        <li><a href="/account/login/">{% trans "Login" %}</a></li>
+                        <li><a href="/account/register/">{% trans "Register" %}</a></li>
                         {% endif %}
                     </ul>
                 </li>
 
                 <li>
-                    <a class="" href="/cart/">Shopping Cart</a>
+                    <a class="" href="/cart/">{% trans "Shopping Cart" %}</a>
                 </li>
 
 
@@ -82,7 +82,7 @@
                 <div class="form-group">
                     <input type="text" name="search_term" id="search_term" placeholder="Search" class="form-control" required>
                 </div>
-                <button id="search" type="submit" class="btn btn-success">Search</button>
+                <button id="search" type="submit" class="btn btn-success">{% trans "Search" %}</button>
             </form>
 
 

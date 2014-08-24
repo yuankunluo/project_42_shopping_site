@@ -1,9 +1,9 @@
 {% extends 'store/base.html' %}
 
-{% block title %}Search For {{ search_term }}{% endblock %}
+{% block title %}{% trans "Search For" %} {{ search_term }}{% endblock %}
 
 {% block content %}
-        <h1>Search Result for {{ search_term }}</h1>
+        <h1>{% trans "Search Result for" %} {{ search_term }}</h1>
         <hr/>
         {% load staticfiles %}
          <ul class="thumbnails">

@@ -1,6 +1,6 @@
 {% extends 'store/base.html' %}
 
-{% block title %}Homepage{% endblock %}
+{% block title %}{% trans "Homepage" %}{% endblock %}
 
 {% block content %}
   <div class="row">
@@ -53,7 +53,7 @@
                      <span class="label label-default">$ {{ p.default_price }}</span>
                 {% endif %}
                       </p>
-                        <p><a class="btn btn-danger btn-large" href="/store/product/{{ p.slug }}/">Buy Now</a></p>
+                        <p><a class="btn btn-danger btn-large" href="/store/product/{{ p.slug }}/">{% trans "Buy Now" %}</a></p>
                     </div>
                 </div>
                 {% endfor %}
@@ -66,12 +66,12 @@
 
       <div class="span4">
          <div class="hero-unit">
-            <h1>Top Selling Products!</h1>
+            <h1>{% trans "Top Selling Products" %}!</h1>
             <table class="table table-hover">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Selling</th>
+                <th>{% trans "Product" %}</th>
+                <th>{% trans "Selling" %}</th>
             </tr>
         </thead>
         <tbody>

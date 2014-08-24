@@ -1,17 +1,17 @@
 {% extends 'store/base.html' %}
 {% load i18n %}
 
-{% block title%}Register{% endblock %}
+{% block title%}{% trans "Register" %}{% endblock %}
 
 {% block content %}
-<h1>User Login</h1>
-<h2>If you don't have any account, please <a class="btn btn-warning" href="/account/register/">Register</a></h2>
+<h1>{% trans "User Login" %}</h1>
+<h2>{% trans "If you don't have any account, please" %} <a class="btn btn-warning" href="/account/register/">Register</a></h2>
 <hr/>
 
 <form action="/account/login/" method="post" class="form-horizontal pager">
     {% csrf_token %}
     <div class="control-group">
-        <label class="control-label" for="username">Username</label>
+        <label class="control-label" for="username">{% trans "Username" %}</label>
 
         <div class="controls">
             <input type="text" name='username' id="username" placeholder="Username">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label" for="password">Password</label>
+        <label class="control-label" for="password">{% trans "Password" %}</label>
 
         <div class="controls">
             <input type="password" name="password" id="password" placeholder="Password">
@@ -29,7 +29,7 @@
 
     <div class="control-group">
         <div class="controls">
-            <button type="submit" class="btn btn-success">Login</button>
+            <button type="submit" class="btn btn-success">{% trans "Login" %}</button>
         </div>
     </div>
 </form>

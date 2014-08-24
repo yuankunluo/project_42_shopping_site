@@ -1,19 +1,19 @@
 {% extends 'store/base.html' %}
 {% load i18n %}
-{% block title %}Checkout{% endblock %}
+{% block title %}{% trans "Checkout" %}{% endblock %}
 
 {% block content %}
 
-<h1>Checkout</h1>
+<h1>{% trans "Checkout" %}</h1>
 <hr/>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
+            <th>{% trans "Product" %}</th>
+            <th>{% trans "Price" %}</th>
+            <th>{% trans "Quantity" %}</th>
+            <th>{% trans "Total" %}</th>
         </tr>
     </thead>
     <tbody
@@ -45,9 +45,9 @@
             <div class="span6 offset6">
                 <form action="/account/pay/" method="post">
                     {% csrf_token %}
-                    <h2>Total: $ {{cart_subtotal}}</h2>
+                    <h2>{% trans "Total" %}: $ {{cart_subtotal}}</h2>
                     <fieldset>
-                        <legend>Shipping Information</legend>
+                        <legend>{% trans "Shipping Information" %}</legend>
                         <input class="span4" type="text" name="shipping_to" placeholder="Shipping to Whom" required>
                         <textarea class="span4" rows="3" name="shipping_add" id="shipping_add" placeholder="Shipping Address" required></textarea>
                         <input class="span4" type="text" name="shipping_zip" id="shipping_zip" placeholder="Zip Code" required>

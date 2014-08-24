@@ -13,10 +13,10 @@
             <div class="span7 offset2">
                 <h1>{{ product.name }}</h1>
                 {% if product.is_onsale %}
-                    <h2>Price: $ {{product.onsale_price}} <small>Old Price: $ {{product.default_price}}</small></h2>
+                    <h2>{% trans "Price" %}: $ {{product.onsale_price}} <small>{% trans "Old Price" %}: $ {{product.default_price}}</small></h2>
 
                 {% else %}
-                    <h2>Price: $ {{product.default_price}}</h2>
+                    <h2>{% trans "Price" %}: $ {{product.default_price}}</h2>
                 {% endif %}
                 <hr/>
 
@@ -25,7 +25,7 @@
                         <form action="/cart/add/{{product.slug}}/" method="post">
                             {% csrf_token %}
                             <input type="hidden" id="product_slug" name="product_slug" value="{{product.slug}}">
-                            <label for="quantity">Quantity</label>
+                            <label for="quantity">{% trans "Quantity" %}</label>
                             <input class="input-medium" type="number" id="quantity" name="quantity" value="1">
                             <input type="submit" class="btn btn-large btn-info" value="Add to Cart">
                         </form>
@@ -42,14 +42,14 @@
                 <hr/>
                 <div class="row">
                     <div class="span1">
-                         <span class="label label-info label-xlarge">Brand:</span>
+                         <span class="label label-info label-xlarge">{% trans "Brand" %}:</span>
                     </div>
                     <div class="span2">
                         {{product.brand}}
                     </div>
 
                     <div class="span1 offset1">
-                         <span class="label label-info label-xlarge">Category:</span>
+                         <span class="label label-info label-xlarge">{% trans "Category" %}:</span>
                     </div>
                     <div class="span2">
                         {% for c in categories %}
@@ -61,14 +61,14 @@
 
                 <div class="row">
                     <div class="span1">
-                        <span class="label label-info">In Stock</span>
+                        <span class="label label-info">{% trans "In Stock" %}</span>
                     </div>
                     <div class="span2">
                         <p>{{ product.quantity }}</p>
                     </div>
 
                     <div class="span1 offset1">
-                         <span class="label label-info label-xlarge">Update Date:</span>
+                         <span class="label label-info label-xlarge">{% trans "Update Date" %}:</span>
                     </div>
                     <div class="span2">
                         <p>{{product.updated_at}}</p>

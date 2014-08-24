@@ -1,19 +1,19 @@
 {% extends 'store/base.html' %}
 
-{% block title %}Shopping Cart{% endblock %}
+{% block title %}{% trans "Shopping Cart" %}{% endblock %}
 
 {% block content %}
 
-<h1 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Shopping Cart</h1>
+<h1 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">{% trans "Shopping Cart" %}</h1>
         <hr/>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th colspan="2">Quantity</th>
-            <th>Total</th>
+            <th>{% trans "Product" %}</th>
+            <th>{% "Price" %}</th>
+            <th colspan="2">{% trans "Quantity" %}</th>
+            <th>{% trans "Total" %}</th>
         </tr>
     </thead>
     <tbody

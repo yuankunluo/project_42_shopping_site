@@ -1,10 +1,10 @@
 {% extends 'store/base.html' %}
 {% load i18n %}
-{% block title%}Account{% endblock %}
+{% block title%}{% trans "Account" %}{% endblock %}
 
 {% block content %}
    {% if user.is_authenticated %}
-<h1>Welcome, {{ user.username }}. Thanks for logging in.</h1>
+<h1>Welcome, {{ user.username }}. {% trans "Thanks for logging in" %}.</h1>
 <hr/>
         <h2>{% trans "Your Orders:" %}</h2>
         <div class="well">
@@ -12,12 +12,12 @@
             <div class="row">
             <span class="span2 label label-info">{{order.created_at}}</span>
             <a class="span6" href="/account/order/{{order.order_id}}/">{{order.order_id}}</a>
-            <span class="span4">Total Price: {{order.total_price}}</span>
+            <span class="span4">{% trans "Total Price" %}: {{order.total_price}}</span>
             </div>
         {% endfor %}
         </div>
 {% else %}
-<p>Welcome. Please <a href="/account/login/">log in</a>.</p>
+<p>{% trans "Welcome. Please" %} <a href="/account/login/">{% trans "log in" %}</a>.</p>
 
 {% endif %}
 {% endblock %}
