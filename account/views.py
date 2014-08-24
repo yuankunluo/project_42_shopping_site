@@ -62,6 +62,9 @@ def do_login(request):
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect('/account/')
+        else:
+           return HttpResponseRedirect('/')
+
 
 
 @login_required(login_url='/account/login/')

@@ -43,7 +43,7 @@ def product_slug(request, product_slug):
 def product_search(request):
     """
     @TODO
-    Only search for name and description
+    Only search for name and description.
 
 
     :param request: the search term, get from the request
