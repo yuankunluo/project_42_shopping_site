@@ -89,6 +89,8 @@ def checkout(request):
         return render(request, 'account/checkout.html', {'cart_items':cart_items,
                                             'cart_id':cart_items[0].cart_id,
                                             'cart_subtotal':cart_subtotal, 'user':request.user} )
+    else:
+        return HttpResponseRedirect('/account/')
 
 
 
