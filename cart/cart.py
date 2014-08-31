@@ -10,7 +10,9 @@ CART_ID_SESSION_KEY = 'cart_id'
 
 def _generate_cart_id():
     """
-    Generate randomly a cart_id, that has length 50, string
+    Generate randomly a cart_id, that has length 50, string.
+
+    :returns: a string as ID
     """
     cart_id = ''
     characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()'

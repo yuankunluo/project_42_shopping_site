@@ -9,6 +9,7 @@ from homepage import views as homepageviews
 from cart import urls as cart_urls
 
 
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -19,4 +20,5 @@ urlpatterns = patterns('',
     url(r'^product/$', store_views.product_all),
     url(r'^account/', include(account_urls)),
     url(r'^cart/', include(cart_urls)),
+    url(r'^about/$',homepageviews.about,), # the about page
 )

@@ -31,6 +31,11 @@ class Order(models.Model):
 
 
     def generateID(self):
+        """
+        Automatically generate an ID for every order, starts with 'ORD-' following by the randomly numbers.
+
+        :return: String as ID
+        """
         oid = 'ORD-5'
         characters = '0123456789'
         for y in range(15):

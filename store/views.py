@@ -21,6 +21,12 @@ def index(request):
 #==========================================================================
 @require_GET
 def product_all(request):
+    """
+    Returning all products objects in db.
+
+    :param request: the http request
+    :return: the http response
+    """
     products = Product.objects.all()
     for p in products:
         p.img_url = p.image.url[6:]
@@ -29,6 +35,18 @@ def product_all(request):
 
 @require_GET
 def product_slug(request, product_slug):
+    """
+    If the request is asking for a product slug,
+    then it means to find that product page.
+
+    The product_slug in url will be treated as an argument to select record in db.
+    The result will be returned.
+
+
+    :param request: http request
+    :param product_slug:  the slug of product
+    :return: the http response
+    """
     product = Product.objects.get(slug = product_slug)
     product.img_url = product.image.url[6:]
     categories = product.category.all()
@@ -42,8 +60,16 @@ def product_slug(request, product_slug):
 @require_POST
 def product_search(request):
     """
-    @TODO
     Only search for name and description.
+
+    Using the search term from the request to search the relevant products.
+    Calling __dict__ inter methode on the Product class,
+    then using 'name', 'keywords','description' to select information we need.
+
+    Then we use the ***re module*** to get the regular expression to work.
+    Compile the search term as a pattern, then using this pattern to match.
+
+    If matching successfully, then this Product will be collected in a list as result.
 
 
     :param request: the search term, get from the request

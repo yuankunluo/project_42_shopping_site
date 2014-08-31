@@ -9,10 +9,11 @@ from account.models import Order
 def homepage(request):
     """
     Return the homepage views to the user.
-    It contains the product slider, bestseller and statistic informations.
+    It contains the product slider, bestseller and statistic information.
+
 
     :param request: The http request
-    :return: The html
+    :return: The html response
     """
     featured_products = Product.objects.filter(is_featured=True)
     for p in featured_products:
@@ -39,6 +40,10 @@ def homepage(request):
 def get_top_selling(topn = 5):
     """
     Calculate the top5 selling products all the time.
+
+    It search the CartItem table in db to get the quantities of every order,
+    then calculate the summation of selling for every product,
+    order it using OrderedDict.
 
     :param: The top number
     :return: An OrderedDict of [(Product : selling_quantity)]
@@ -69,5 +74,9 @@ def get_top_selling(topn = 5):
 
     return result_list[:topn]
 
+
+def about(request):
+
+    return render(request,'homepage/about.html',{})
 
 

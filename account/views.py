@@ -13,6 +13,12 @@ CART_ID_SESSION_KEY = 'cart_id'
 
 @login_required(login_url='/account/login/')
 def account(request):
+    """
+    Using the login function of django to determin the user if he want to see the account page.
+
+    :param request: http request
+    :return: if authenticated user, then return the account page, else redirect him to login page.
+    """
     if request.user.is_authenticated():
         # Do something for authenticated users.
         orders = Order.objects.filter(username = request.user.username)
@@ -22,6 +28,18 @@ def account(request):
 
 
 def register(request):
+    """
+    Using the information form request to register user.
+
+    It check the password 1 and password 2 that were given by user,
+    if p1 != p2, then give the error as response.
+
+    Adding a user with the django if all information was fine.
+
+
+    :param request: request
+    :return: response
+    """
     if request.method == 'GET':
         return render(request, 'account/register.html')
     if request.method == 'POST':
@@ -51,6 +69,13 @@ def do_logout(request):
 
 
 def do_login(request):
+    """
+    Get the username and password from request as the arguments of authenticate() function by django,
+    to detect if this user is active.
+
+    :param request: request
+    :return: respones
+    """
     if request.method == 'GET':
         return render(request, 'account/login.html')
     if request.method == 'POST':
@@ -96,6 +121,18 @@ def checkout(request):
 
 @login_required(login_url='/account/login/')
 def pay(request):
+    """
+    Do the "create order" thing.
+    It get the CARD_ID_SESSION_KEY from session to get the items information that been added into cart by user.
+    Then calling the cart_subtotal() function in cart_module to get the order total price.
+
+    The shipping information will also be collected through html form.
+
+    If every thing is fine, then create an order, else return error message.
+
+    :param request:
+    :return:
+    """
     if request.method == 'POST':
         if request.session[CART_ID_SESSION_KEY] != '':
             cart_items = cart_module.get_cart_items(request)

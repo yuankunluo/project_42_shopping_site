@@ -4,6 +4,16 @@ from store.models import Product
 
 # Create your models here.
 class CartItem(models.Model):
+    """
+    CartItem table represents the temporary items that being added into cart by user.
+
+    It has
+        * an ID to remember it from session and cookies
+        * the date it be created
+        * the quantity
+        * the reference to Product
+
+    """
     cart_id = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(default=1)
